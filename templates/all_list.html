@@ -1,0 +1,23 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+{% include "header.html" %}
+<div class="container wrapper">
+    <h2>Choose a list</h2>
+    {% for list in lists %}
+    <hr>
+    <div class="lists">
+    <a href="{{ url_for('list_todo', id_list=list.id) }}"><h3>{{ list.title }}</h3></a>
+
+    <a class="btn btn-danger" href="{{ url_for('delete_list', id_list=list.id)}}">Delete</a>
+     </div>
+    {% endfor %}
+
+</div>
+
+
+
+
+{% include "footer.html" %}
+
+{% endblock %}

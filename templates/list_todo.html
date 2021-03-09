@@ -1,0 +1,31 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+{% include "header.html" %}
+
+<div class="container wrapper">
+    <div class="lists">
+        <h2>{{ list.title }}</h2>
+        <a class="btn" href="{{ url_for('new_todo', id_list=list.id) }}">New todo</a>
+    </div>
+    <hr>
+    {% for todo in todos %}
+    <div class="lists">
+        <h3>{{ todo.todo_name }}</h3>
+
+
+        {% if todo.done %}
+        <a href="{{ url_for('update_done', id_todo=todo.id)}}"><i class="fas fa-check-circle"></i>Done</a>
+        {% else %}
+        <a href="{{ url_for('update_done', id_todo=todo.id)}}"><i class="far fa-circle"></i>Done</a>
+
+        {% endif %}
+        <a class="btn btn-danger" href="{{ url_for('delete_todo', id_todo=todo.id)}}">Delete</a>
+
+    </div>
+    {% endfor %}
+
+
+</div>
+{% include "footer.html" %}
+{% endblock %}

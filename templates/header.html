@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>todo list</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/v4-shims.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/v4-shims.css">
+</head>
+<body>
+
+ <!-- Navigation -->
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" id="mainNav">
+       {% if current_user.is_authenticated: %}
+        <p>{{ current_user.email }}</p>
+        {% else: %}
+        <p>No registered</p>
+        {% endif %}
+    <div class="container">
+      <a class="navbar-brand" href="{{url_for('get_all_list')}}">Todo List</a>
+
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('get_all_list') }}">Home</a>
+          </li>
+            {% if not current_user.is_authenticated: %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+          </li>
+           {% else: %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
+          </li>
+           {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('new_list') }}">New list</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+{% block content %}
+       {% endblock %}
